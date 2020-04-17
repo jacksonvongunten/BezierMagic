@@ -41,10 +41,3 @@ class GeneralBezier:
         plt.xlabel("X Position")
         plt.ylabel("Y Position")
         plt.show()
-
-p = [Point2D(0,0), Point2D(5,5)]
-control_points = [Point2D(1,8), Point2D(5,8)]
-
-B = GeneralBezier(p)
-B.add_control_points(control_points)
-B.plot()
