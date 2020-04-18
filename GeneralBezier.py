@@ -1,11 +1,13 @@
 from Point2D import Point2D
 from MathHelperFunctions import MathHelperFunctions
 from matplotlib import pyplot as plt
+from matplotlib.animation import FuncAnimation
+from matplotlib.widgets import Slider
 
 class GeneralBezier:
 
     def __init__(self, p):
-        self.t = MathHelperFunctions.linspace(0, 1, 1000)
+        self.t = MathHelperFunctions.linspace(0, 1, 200)
         self.p = p
     
     def __repr__(self):
@@ -31,13 +33,28 @@ class GeneralBezier:
         return self.lines
 
     def plot(self):
-        for i in range(len(self.get_points())):
-            plt.plot(self.get_points()[i].get_x(), self.get_points()[i].get_y(), marker="x", color="b")
-        for path in self.rough_path():
-            plt.plot(path.generate_x(), path.generate_y(), color='b', linestyle="dashed")
-        plt.plot(self.generate_x(), self.generate_y(), color="k")
+        fig, ax = plt.subplots()
+        plt.subplots_adjust(bottom=0.2)
         plt.grid()
         plt.title("Bezier Curve")
         plt.xlabel("X Position")
         plt.ylabel("Y Position")
+        xdata, ydata = [], []
+        ln, = plt.plot([], [], color='k')
+
+        def update(t):
+            xdata = self.generate_x()[:int(t*199)]
+            ydata = self.generate_y()[:int(t*199)]
+            ln.set_data(xdata, ydata)
+
+        for i in range(len(self.get_points())):
+            plt.plot(self.get_points()[i].get_x(), self.get_points()[i].get_y(), marker="x", color="b")
+        for path in self.rough_path():
+            plt.plot(path.generate_x(), path.generate_y(), color='b', linestyle="dashed")
+
+        axslider = plt.axes([0.25, 0.05, 0.50, 0.02])
+        time_slider = Slider(axslider, "Time", 0, 1, 0)
+
+        time_slider.on_changed(update)
+        
         plt.show()
