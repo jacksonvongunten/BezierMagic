@@ -99,10 +99,10 @@ class BezierCurve:
         tangent, = plt.plot([], [], color='r', marker='x')
         left_traj, = plt.plot([], [], color='r')
         right_traj, = plt.plot([], [], color='r')
-        rect1 = patches.Rectangle((1, 0), 3, 3, color='r')
-        rect2 = patches.Rectangle((6, 3), 2, 1, color='r')
-        ax.add_patch(rect1)
-        ax.add_patch(rect2)
+        # rect1 = patches.Rectangle((1, 0), 3, 3, color='r')
+        # rect2 = patches.Rectangle((6, 3), 2, 1, color='r')
+        # ax.add_patch(rect1)
+        # ax.add_patch(rect2)
 
         def draw_control_points():
             self.control_points_from_file("control_points.txt")
