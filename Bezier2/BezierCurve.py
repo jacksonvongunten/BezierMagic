@@ -15,10 +15,13 @@ class BezierCurve:
 
     def __init__(self, points):
         self.points = points
-        self.t = DiscreteSet(0, 1, 200)
+        self.t = DiscreteSet(0, 1, 250)
     
     def get_points(self):
         return [(point.get_x(), point.get_y()) for point in self.points]
+    
+    def get_t(self):
+        return self.t
     
     def add_control_points(self, control_points):
         for i in range(len(control_points)):
